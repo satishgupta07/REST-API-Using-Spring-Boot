@@ -3,6 +3,7 @@ package com.satish07.bootrestbook.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,5 +34,10 @@ public class BookController {
 		Book b = this.bookService.addBook(book);
 		System.out.println(book);
 		return b;
+	}
+	
+	@DeleteMapping("/books/{bookId}")
+	public void deleteBook(@PathVariable("bookId") int bookId) {
+		this.bookService.deleteBook(bookId);
 	}
 }
