@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.satish07.bootrestbook.entities.Book;
@@ -15,15 +17,6 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
-
-//	@GetMapping("/books")
-//	public Book getBooks() {
-//		Book book = new Book();
-//		book.setId(12324);
-//		book.setTitle("Java Complete Reference");
-//		book.setAuthor("XYZ");
-//		return book;
-//	}
 	
 	@GetMapping("/books")
 	public List<Book> getBooks() {
@@ -33,5 +26,12 @@ public class BookController {
 	@GetMapping("/books/{id}")
 	public Book getBook(@PathVariable("id") int id) {
 		return bookService.getBookById(id);
+	}
+	
+	@PostMapping("/books")
+	public Book addBook(@RequestBody Book book) {
+		Book b = this.bookService.addBook(book);
+		System.out.println(book);
+		return b;
 	}
 }
